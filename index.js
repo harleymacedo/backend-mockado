@@ -86,7 +86,7 @@ app.put('/professores', (req, res) => {
         } 
     });
     res.json({
-        mensagem: 'Informação atualizada com sucesso',
+        mensagem: 'Informação atualizada',
         erro: false
     });
 });
