@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const jwt = require('jsonwebtoken');
-const cors = require('cors');
+const {obterProfessores} = require('./model/professorModel');
 
 app.use(express.json());
 
@@ -52,6 +52,17 @@ function verifyJWT (req, res, next) {
 
 app.get('/professores', (req, res) => {
     res.json(dados);
+});
+
+app.get('/bd/professores', async (req, res) => {
+    try{
+        const resultado = await obterProfessores(req, res);
+        const dados = await resultado.rows;
+        res.json(dados);
+    } catch(erro) {
+        res.json({'mensagem': 'Erro na obteção dos dados'})
+    }
+
 });
 
 app.get('/professores/:id', (req, res) => {
