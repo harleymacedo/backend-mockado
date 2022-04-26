@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
-const database = require('./conexao');
+const database = require('./database');
 
-const Disciplia = database.define('disciplina', {
+const Disciplina = database.define('disciplina', {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -11,5 +11,11 @@ const Disciplia = database.define('disciplina', {
     nome: {
         type: Sequelize.STRING,
         allowNull: false
+    },
+    ch: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
     }
 });
+
+module.exports = Disciplina;
