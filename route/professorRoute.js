@@ -39,7 +39,17 @@ router.put('/professor', async (req, res) => {
         professorAtual.nome = req.body.nome;
         professorAtual.area = req.body.area;
         await professorAtual.save();
-        res.json({'mensagem': 'Professor atualizado com sucesso'})
+        res.json({'mensagem': 'Professor atualizado com sucesso'});
+    } catch (erro) {
+        res.json({'mensagem': erro});
+    }
+});
+
+router.delete('/professor/:id', async (req, res) => {
+    try {
+        const professorAtual = await Professor.findByPk(req.params.id);
+        await professorAtual.destroy();
+        res.json({'mensagem': 'Professor excluído com sucesso'});
     } catch (erro) {
         res.json({'mensagem': erro});
     }
