@@ -19,4 +19,3 @@ const Professor = database.define('professor', {
 });
 
 module.exports = Professor;
-

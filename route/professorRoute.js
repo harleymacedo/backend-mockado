@@ -12,26 +12,38 @@ router.get('/professor/todos', async (req, res) => {
     }
 });
 
-router.get('/professores/:id', async (req, res) => {
+router.get('/professor/:id', async (req, res) => {
     try{
-        
+       let resultado = await Professor.findByPk(req.params.id);
+       res.json(resultado); 
     } catch(erro) {
-        
+       res.json({'mensagem': erro});
     }
 });
 
-router.post('/professores', async (req, res) => {
+router.post('/professor', async (req, res) => {
     try{
         await Professor.create({
-            nome: "Nome1",
-            area: "Area1",
-            email: "email1@servidor.com"
+            nome: req.body.nome,
+            area: req.body.area
         });
         res.json({'mensagem': 'Professor inserido com sucesso'});
     } catch(erro) {
         res.json({'mensagem': erro});
     }
 })
+
+router.put('/professor', async (req, res) => {
+    try{
+        const professorAtual = await Professor.findByPk(req.body.id);
+        professorAtual.nome = req.body.nome;
+        professorAtual.area = req.body.area;
+        await professorAtual.save();
+        res.json({'mensagem': 'Professor atualizado com sucesso'})
+    } catch (erro) {
+        res.json({'mensagem': erro});
+    }
+});
 
 router.post('/login', (req, res) => {
     if (req.body.user === 'harleymacedo' && req.body.pass === '123456') {
